@@ -44,6 +44,9 @@ private:
   // Holding
   void hold();
 
+  // 블록이 움직일 수 있는가
+  bool checkCollision(int x, int y, const Tetromino& tetromino) const;
+
   // 줄 지우기
   void clearLines();
 

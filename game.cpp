@@ -158,7 +158,6 @@
             currentTetromino = currentTetromino.rotatedCW();
         }
     }
-
     void Game::clearLines() {
         
     }
@@ -170,26 +169,24 @@
         keyInput();
 
         if (timer == DROP_DELAY) {
+            if (y == sh) { // 블록이 도착 했을 때
+                // 현재 위치에 블록을 고정
+                for (int i = 0; i < currentTetromino.size(); i++) {
+                    for (int j = 0; j < currentTetromino.size(); j++) {
+                        if (currentTetromino.check(i,j)) {
+                            board_[x + j - 1][y + i - 1] = true;
+                        }
+                    }
+                }
+                clearLines(); // 가득 찬 줄이 있는지 확인하고 지우기
+                x = 5; // 새로운 블록을 떨어뜨릴 위치
+                y = 1;
+                is_hold = false;
+                currentTetromino = nextTetromino; // 다음 블록을 현재 블록으로 설정
+                makeNewTetromino(1); // 새로운 다음 블록 생성
+            }
             timer = 0;
             y++;
-            // if (!checkCollision(x, y + 1, currentTetromino)) { // 블록이 아래로 이동 가능한지 확인
-            // y++;
-            // } else { // 블록이 이동할 수 없을 때
-            //     // 현재 위치에 블록을 고정
-            //     for (int i = 0; i < currentTetromino.size(); i++) {
-            //         for (int j = 0; j < currentTetromino.size(); j++) {
-            //             if (currentTetromino.getShape()[i][j]) {
-            //                 board_[x + j][y + i] = true;
-            //             }
-            //         }
-            //     }
-            //     clearLines(); // 가득 찬 줄이 있는지 확인하고 지우기
-            //     x = 5; // 새로운 블록을 떨어뜨릴 위치
-            //     y = 1;
-            //     is_hold = false;
-            //     currentTetromino = nextTetromino; // 다음 블록을 현재 블록으로 설정
-            //     makeNewTetromino(1); // 새로운 다음 블록 생성
-            // }
         } 
     }
 
