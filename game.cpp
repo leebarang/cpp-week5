@@ -119,6 +119,22 @@
         y = sh;
     }
 
+    void Game::hold() {
+        if (hold_empty) {
+            hold_empty = false;
+            is_hold = true;
+            holdingTetromino = *currentTetromino.original();
+            currentTetromino = nextTetromino;
+            makeNewTetromino(1);
+        }
+        if (!is_hold && !hold_empty) {
+            is_hold = true;
+            Tetromino temp = *currentTetromino.original();
+            currentTetromino = holdingTetromino;
+            holdingTetromino = temp;
+        } 
+    }
+
     void Game::keyInput() {
         if (console::key(console::K_LEFT)) {
             x--;
@@ -133,19 +149,7 @@
             y++;
         }
         if (console::key(console::K_SPACE)) {
-            if (hold_empty) {
-                hold_empty = false;
-                is_hold = true;
-                holdingTetromino = currentTetromino;
-                currentTetromino = nextTetromino;
-                makeNewTetromino(1);
-            }
-            if (!is_hold && !hold_empty) {
-                is_hold = true;
-                Tetromino temp = currentTetromino;
-                currentTetromino = holdingTetromino;
-                holdingTetromino = temp;
-            } 
+            hold();
         }
         if (console::key(console::K_Z)) {
             currentTetromino = currentTetromino.rotatedCCW();
@@ -182,6 +186,7 @@
             //     clearLines(); // 가득 찬 줄이 있는지 확인하고 지우기
             //     x = 5; // 새로운 블록을 떨어뜨릴 위치
             //     y = 1;
+            //     is_hold = false;
             //     currentTetromino = nextTetromino; // 다음 블록을 현재 블록으로 설정
             //     makeNewTetromino(1); // 새로운 다음 블록 생성
             // }

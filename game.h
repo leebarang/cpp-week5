@@ -41,6 +41,9 @@ private:
   // Hard Drop
   void hardDrop();
 
+  // Holding
+  void hold();
+
   // 줄 지우기
   void clearLines();
 
