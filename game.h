@@ -41,6 +41,9 @@ private:
   // Hard Drop
   void hardDrop();
 
+  // 줄 지우기
+  void clearLines();
+
 public:
   // 게임의 한 프레임을 처리한다.
   void update();
