@@ -26,6 +26,9 @@ private:
   // 승리 화면을 출력한다.
   void printWin();
 
+  // 패배 화면을 출력한다.
+  void printLose();
+
   // 현재까지의 플레이 타임을 반환한다.
   std::string getPlaytime(int time);
 
@@ -45,10 +48,13 @@ private:
   void hold();
 
   // 블록이 움직일 수 있는가
-  bool checkCollision(int x, int y, const Tetromino& tetromino) const;
+  bool checkCollision(int newX, int newY, Tetromino tetromino);
 
   // 줄 지우기
   void clearLines();
+
+  // 블록 업데이트
+  void blockArrived();
 
 public:
   // 게임의 한 프레임을 처리한다.
@@ -61,5 +67,7 @@ public:
   bool shouldExit();
 
   Game();
+  
 };
+
 #endif
