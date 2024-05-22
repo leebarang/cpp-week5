@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include "game.h"
 
 #define SHADOW_STRING "⛶"
 #define BLOCK_STRING "■"
